@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamarinTweetForList.Views.MainPage"
+             Title="MainPage">
+
+    <ListView ItemsSource="{Binding Timeline}"
+              HasUnevenRows="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1" />
+                            <RowDefinition Height="16" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="1" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--二行目-->
+                        <!--アイコン-->
+                        <Image Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"
+                               VerticalOptions="Start"
+                               Source="{Binding ProfileImageURL}"
+                               Aspect="AspectFit"
+                               />
+                        <!--TwitterID-->
+                        <Grid Grid.Row="1" Grid.Column="2" >
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="Start">
+                                <Label Text="{Binding Name}"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       />
+                                <Label Text="{Binding DisplayScreenName}"
+                                       FontSize="12"
+                                       TextColor="#657786"
+                                       VerticalOptions="Start"
+                                       />
+                            </StackLayout>
+                        </Grid>
+                        <!--時間-->
+                        <Label Grid.Row="1" Grid.Column="3"
+                               Text="{Binding PostedAt}"/>
+                        <!--三行目-->
+                        <!--Tweet内容-->
+                        <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
+                               Text="{Binding Text}"
+                               FontSize="12"
+                               />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>
